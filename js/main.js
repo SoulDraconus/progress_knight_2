@@ -1272,7 +1272,7 @@ function rebirthTwo() {
 
     for (taskName in gameData.taskData) {
 	var task = gameData.taskData[taskName]
-	task.maxLevel = gameData.essence/100
+	task.maxLevel = Math.round(gameData.essence/100)
     }    
 }
 
