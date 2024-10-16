@@ -30,7 +30,7 @@ var gameData = {
     currentMisc: null,
 
     saveDate: "",
-    moneyHapy: 1,
+    moneyHappy: 1,
 
     settings: {
         stickySidebar: false
