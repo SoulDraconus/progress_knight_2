@@ -30,6 +30,7 @@ var gameData = {
     currentMisc: null,
 
     saveDate: "",
+    moneyHapy: 1,
 
     settings: {
         stickySidebar: false
@@ -542,7 +543,7 @@ function getHappiness() {
     var butlerEffect = getBindedItemEffect("Butler")
 	var mindseizeEffect = getBindedTaskEffect("Mind Seize")
 	var multiverseFragment = getBindedItemEffect("Multiverse Fragment")
-    var happiness = meditationEffect() * butlerEffect() / mindseizeEffect() * multiverseFragment() * gameData.currentProperty.getEffect()
+    var happiness = meditationEffect() * butlerEffect() / mindseizeEffect() * multiverseFragment() * gameData.currentProperty.getEffect() * gameData.moneyHappy
     return happiness
 }
 
@@ -1041,7 +1042,11 @@ function autoBuy(){
     }
     
     if (nextProperty == null && nextMisc == null){
-        return
+        if (gameData.coins > getExpense()*1000000){
+		gameData.moneyHappy+=100
+		gameData.coins = 0
+	}
+	return
     }
     else if (nextProperty == null){
         checkMisc(nextMisc, miscCost)
@@ -1059,6 +1064,8 @@ function autoBuy(){
     else{
         bonusRun = bonusRun + 1
     }
+
+	
 }
 
 function getBonus(nextProperty, previousProperty, propertyChange, nextMisc, miscCost){
@@ -1315,6 +1322,7 @@ function rebirthReset() {
     gameData.currentSkill = gameData.taskData["Concentration"]
     gameData.currentProperty = gameData.itemData["Homeless"]
     gameData.currentMisc = []
+    gameData.moneyHappy = 1
 
     for (taskName in gameData.taskData) {
         var task = gameData.taskData[taskName]
